@@ -40,8 +40,7 @@ namespace RESTAPI.Repositories.Implementations
             if (entityToUpdate != null)
             {
                 entityToUpdate = newData;
-            }
-            _context.Update(entityToChange);
+            } 
             _context.SaveChanges();
             return newData;
 

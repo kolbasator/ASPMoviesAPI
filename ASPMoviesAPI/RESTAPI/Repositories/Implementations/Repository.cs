@@ -1,58 +1,65 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Collections.Generic;  
-using RESTAPI.Models;
+using System.Collections.Generic;
+using RESTAPI.Data;
 using RESTAPI.Repositories.Interfaces;
 
 namespace RESTAPI.Repositories.Implementations
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private CodeFirstContext _context { get; set; }
+        private CodeFirstContext Context { get; }
 
         public List<T> GetAll()
         {
-            var result = _context.Set<T>().AsQueryable().Select(e=>e).ToList();
+            var result = Context.Set<T>().AsQueryable().Select(e => e).ToList();
             return result;
         }
 
-        public List<T> GetMany(Expression<Func<T,bool>> query)
+        public List<T> GetMany(Expression<Func<T, bool>> query)
         {
-            var result = _context.Set<T>().AsQueryable().Where(query);
+            var result = Context.Set<T>().AsQueryable().Where(query);
             return result.ToList();
-        } 
+        }
+
         public T Get(Expression<Func<T, bool>> query)
         {
-            var result = _context.Set<T>().AsQueryable().FirstOrDefault(query);
+            var result = Context.Set<T>().AsQueryable().FirstOrDefault(query);
             return result;
         }
-        public T Post(T model)
+
+        public T Add(T model)
         {
-            _context.Set<T>().Add(model);
-            _context.SaveChanges();
+            Context.Set<T>().Add(model);
             return model;
         }
 
-        public T Put(T newData, Expression<Func<T, bool>> entityToChange)
+        public T Update(T newData, Expression<Func<T, bool>> entityToChange)
         {
-            var entityToUpdate = _context.Set<T>().FirstOrDefault(entityToChange);
+            var entityToUpdate = Context.Set<T>().FirstOrDefault(entityToChange);
+            
             if (entityToUpdate != null)
             {
                 entityToUpdate = newData;
-            } 
-            _context.SaveChanges();
-            return newData;
-
+            }
+            
+            return entityToUpdate;
         }
+
         public void Delete(T model)
         {
-            _context.Set<T>().Remove(model);
-            _context.SaveChanges();
-        } 
+            Context.Set<T>().Remove(model);
+        }
+
+        public int SaveChanges()
+        {
+            return Context.SaveChanges();
+        }
+
         public Repository(CodeFirstContext context)
         {
-            _context = context;
+            Context = context;
         }
     }
 }

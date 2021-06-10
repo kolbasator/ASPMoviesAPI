@@ -1,10 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
+using RESTAPI.Models;
 
 #nullable disable
 
-namespace RESTAPI.Models
+namespace RESTAPI.Data
 {
     public partial class CodeFirstContext : DbContext
     {
@@ -29,15 +28,12 @@ namespace RESTAPI.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=CodeFirstContextDataBase;Username=postgres;Password=razumovsky123");
+                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=MusyakaApiDatabase;Username=postgres;Password=postgres");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "English_United Kingdom.1252");
-
             modelBuilder.Entity<Copy>(entity =>
             {
                 entity.HasIndex(e => e.MovieId, "IX_Copies_MovieId");

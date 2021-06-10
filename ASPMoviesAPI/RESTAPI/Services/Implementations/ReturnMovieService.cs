@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using RESTAPI.Data;
 using RESTAPI.Services.Interfaces;
 using RESTAPI.Models;
 using RESTAPI.Repositories.Interfaces;
@@ -27,7 +28,7 @@ namespace RESTAPI.Services.Implementations
             var rental = _rentals.Get(getRental);
             if (copy != null && rental != null)
             {
-                _copies.Put(new Copy { CopyId = copy.CopyId, Available = true, MovieId = copy.MovieId }, getCopy);
+                _copies.Update(new Copy { CopyId = copy.CopyId, Available = true, MovieId = copy.MovieId }, getCopy);
                 var elementToUpdate = _context.Rentals.Where(r => r == rental).ToList();
                 elementToUpdate.ElementAt(0).DateOfReturn = new DateTime(DateTime.Now.Day,DateTime.Now.Month,DateTime.Now.Day,DateTime.Now.Hour,DateTime.Now.Minute,DateTime.Now.Second);
             }

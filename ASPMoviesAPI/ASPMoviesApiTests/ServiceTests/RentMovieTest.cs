@@ -3,6 +3,7 @@ using FluentAssertions;
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using RESTAPI.Data;
 using RESTAPI.Services.Implementations;
 using RESTAPI.Repositories.Interfaces;
 using RESTAPI.Repositories.Implementations;

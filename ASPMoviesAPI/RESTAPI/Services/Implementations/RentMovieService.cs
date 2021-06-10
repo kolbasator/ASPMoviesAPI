@@ -1,5 +1,6 @@
 ﻿using System; 
-using System.Linq.Expressions; 
+using System.Linq.Expressions;
+using RESTAPI.Data;
 using RESTAPI.Services.Interfaces;
 using RESTAPI.Models;
 using RESTAPI.Repositories.Interfaces;
@@ -26,9 +27,9 @@ namespace RESTAPI.Services.Implementations
                 var copy = _copies.Get(getAvailableCopy);
                 if (copy != null)
                 {
-                    _copies.Put(new Copy { CopyId = copy.CopyId, Available = false, MovieId = copy.MovieId },getAvailableCopy);
+                    _copies.Update(new Copy { CopyId = copy.CopyId, Available = false, MovieId = copy.MovieId },getAvailableCopy);
                     var newRental = new Rental { CopyId = copy.CopyId, ClientId = client.ClientId, DateOfRental = DateTime.Now, DateOfReturn = null };
-                    _rentals.Post(newRental);
+                    _rentals.Add(newRental);
                 }
             }
             _context.SaveChanges();

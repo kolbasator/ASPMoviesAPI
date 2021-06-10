@@ -7,7 +7,7 @@ using RESTAPI.Repositories.Interfaces;
 using RESTAPI.Repositories.Implementations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication16667.Controllers
+namespace RESTAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -67,7 +67,7 @@ namespace WebApplication16667.Controllers
         {
             string success;
             Expression<Func<Copy, bool>> getCopy = i => i.CopyId == copyId;
-            Expression<Func<Rental, bool>> getRental = i => i.CopyId == copyId && i.ClientId == clientId && i.DateOfRental == dateOfRental;
+            Expression<Func<Rental, bool>> getRental = i => i.CopyId == copyId && i.ClientId == clientId && new DateTime(i.DateOfRental.Value.Year, i.DateOfRental.Value.Month, i.DateOfRental.Value.Day, i.DateOfRental.Value.Hour, i.DateOfRental.Value.Minute, i.DateOfRental.Value.Second) == dateOfRental;
             var copy = _copies.Get(getCopy);
             var rental = _rentals.Get(getRental);
             if (copy != null && rental != null)

@@ -12,13 +12,13 @@ namespace RESTAPI.Services.Implementations
     public class ReturnMovieService : IReturnMovieService
     {
         private CodeFirstContext _context { get; set; }
-        private IRepository<Rental> _rentals { get; set; }
-        private IRepository<Copy> _copies { get; set; }
-        public ReturnMovieService(CodeFirstContext context)
+        private RentalsRepository _rentals; 
+        private CopiesRepository _copies;
+        public ReturnMovieService(CodeFirstContext context, CopiesRepository copies,RentalsRepository rentals)
         {
             _context = context;
-            _copies = new Repository<Copy>(_context);
-            _rentals = new Repository<Rental>(_context);
+            _copies = copies;
+            _rentals = rentals;
         }
         public void ReturnMovie(int copyId, int clientId, DateTime dateOfRental)
         {

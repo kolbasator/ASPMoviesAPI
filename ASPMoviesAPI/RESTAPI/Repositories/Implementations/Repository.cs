@@ -9,33 +9,33 @@ namespace RESTAPI.Repositories.Implementations
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private CodeFirstContext Context { get; }
+        public CodeFirstContext Context { get; set; }
 
-        public List<T> GetAll()
+        public virtual List<T> GetAll()
         {
             var result = Context.Set<T>().AsQueryable().Select(e => e).ToList();
             return result;
         }
 
-        public List<T> GetMany(Expression<Func<T, bool>> query)
+        public virtual List<T> GetMany(Expression<Func<T, bool>> query)
         {
             var result = Context.Set<T>().AsQueryable().Where(query);
             return result.ToList();
         }
 
-        public T Get(Expression<Func<T, bool>> query)
+        public virtual T Get(Expression<Func<T, bool>> query)
         {
             var result = Context.Set<T>().AsQueryable().FirstOrDefault(query);
             return result;
         }
 
-        public T Add(T model)
+        public virtual T Add(T model)
         {
             Context.Set<T>().Add(model);
             return model;
         }
 
-        public T Update(T newData, Expression<Func<T, bool>> entityToChange)
+        public virtual T Update(T newData, Expression<Func<T, bool>> entityToChange)
         {
             var entityToUpdate = Context.Set<T>().FirstOrDefault(entityToChange);
             
@@ -47,7 +47,7 @@ namespace RESTAPI.Repositories.Implementations
             return entityToUpdate;
         }
 
-        public void Delete(T model)
+        public virtual void Delete(T model)
         {
             Context.Set<T>().Remove(model);
         }

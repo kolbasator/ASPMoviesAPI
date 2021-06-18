@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RESTAPI", "RESTAPI\RESTAPI.csproj", "{2D1721F2-33D9-4A95-B510-5E5BDAF4A92A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RESTAPI.Core", "RESTAPI\RESTAPI.Core.csproj", "{2D1721F2-33D9-4A95-B510-5E5BDAF4A92A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPMoviesApiTests", "ASPMoviesApiTests\ASPMoviesApiTests.csproj", "{2E176F58-8E76-408B-A08F-F6764DB7EF58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASPMoviesApi.IntegrationTests", "ASPMoviesApiTests\ASPMoviesApi.IntegrationTests.csproj", "{2E176F58-8E76-408B-A08F-F6764DB7EF58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPMoviesAPI.UnitTests", "ASPMoviesAPI.UnitTests\ASPMoviesAPI.UnitTests.csproj", "{872A2A1C-267E-48FD-80A8-A1A97E8FBBC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{2E176F58-8E76-408B-A08F-F6764DB7EF58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E176F58-8E76-408B-A08F-F6764DB7EF58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E176F58-8E76-408B-A08F-F6764DB7EF58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{872A2A1C-267E-48FD-80A8-A1A97E8FBBC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{872A2A1C-267E-48FD-80A8-A1A97E8FBBC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{872A2A1C-267E-48FD-80A8-A1A97E8FBBC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{872A2A1C-267E-48FD-80A8-A1A97E8FBBC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

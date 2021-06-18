@@ -28,7 +28,7 @@ namespace RESTAPI.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=MusyakaApiDatabase;Username=postgres;Password=postgres");
+                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=CodeFirstContextDataBase;Username=postgres;Password=razumovsky123");
             }
         }
 

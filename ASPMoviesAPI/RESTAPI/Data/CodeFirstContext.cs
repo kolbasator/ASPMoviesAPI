@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RESTAPI.Models;
-
+using RESTAPI.Configurations;
 #nullable disable
 
 namespace RESTAPI.Data
@@ -34,56 +34,13 @@ namespace RESTAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Copy>(entity =>
-            {
-                entity.HasIndex(e => e.MovieId, "IX_Copies_MovieId");
-
-                entity.HasOne(d => d.Movie)
-                    .WithMany(p => p.Copies)
-                    .HasForeignKey(d => d.MovieId);
-            });
-
-            modelBuilder.Entity<Employee>(entity =>
-            {
-                entity.HasKey(e => new { e.Firstname, e.Lastname });
-
-                entity.Property(e => e.Firstname).HasDefaultValueSql("''::text");
-
-                entity.Property(e => e.Lastname).HasDefaultValueSql("''::text");
-            });
-
-            modelBuilder.Entity<Rental>(entity =>
-            {
-                entity.HasKey(e => new { e.CopyId, e.ClientId });
-
-                entity.HasIndex(e => e.ClientId, "IX_Rentals_ClientId");
-
-                entity.HasOne(d => d.Client)
-                    .WithMany(p => p.Rentals)
-                    .HasForeignKey(d => d.ClientId);
-
-                entity.HasOne(d => d.Copy)
-                    .WithMany(p => p.Rentals)
-                    .HasForeignKey(d => d.CopyId);
-            });
-
-            modelBuilder.Entity<Starring>(entity =>
-            {
-                entity.HasKey(e => new { e.ActorId, e.MovieId });
-
-                entity.ToTable("Starring");
-
-                entity.HasIndex(e => e.MovieId, "IX_Starring_MovieId");
-
-                entity.HasOne(d => d.Actor)
-                    .WithMany(p => p.Starrings)
-                    .HasForeignKey(d => d.ActorId);
-
-                entity.HasOne(d => d.Movie)
-                    .WithMany(p => p.Starrings)
-                    .HasForeignKey(d => d.MovieId);
-            });
-
+            modelBuilder.ApplyConfiguration(new MovieConfiguration());
+            modelBuilder.ApplyConfiguration(new CopyConfiguration());
+            modelBuilder.ApplyConfiguration(new ClientConfiguration());
+            modelBuilder.ApplyConfiguration(new RentalConfiguration());
+            modelBuilder.ApplyConfiguration(new ActorConfiguration());
+            modelBuilder.ApplyConfiguration(new StarringConfiguration());
+            modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
             OnModelCreatingPartial(modelBuilder);
         }
 

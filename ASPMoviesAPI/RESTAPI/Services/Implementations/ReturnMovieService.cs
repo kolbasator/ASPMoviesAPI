@@ -11,9 +11,9 @@ namespace RESTAPI.Services.Implementations
 {
     public class ReturnMovieService : IReturnMovieService
     {
-        private CodeFirstContext _context { get; set; }
-        private RentalsRepository _rentals; 
-        private CopiesRepository _copies;
+        private readonly CodeFirstContext _context;
+        private readonly RentalsRepository _rentals; 
+        private readonly CopiesRepository _copies;
         public ReturnMovieService(CodeFirstContext context, CopiesRepository copies,RentalsRepository rentals)
         {
             _context = context;

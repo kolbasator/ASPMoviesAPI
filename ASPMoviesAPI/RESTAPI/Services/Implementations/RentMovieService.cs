@@ -10,11 +10,19 @@ namespace RESTAPI.Services.Implementations
 {
     public class RentMovieService : IRentMovieService
     {
-        private CodeFirstContext _context;
-        private MoviesRepository _movies;
-        private RentalsRepository _rentals;
-        private ClientsRepository _clients;
-        private CopiesRepository _copies;
+        private readonly CodeFirstContext _context;
+        private readonly MoviesRepository _movies;
+        private readonly RentalsRepository _rentals;
+        private readonly ClientsRepository _clients;
+        private readonly CopiesRepository _copies; 
+        public RentMovieService(CodeFirstContext context, ClientsRepository clients, CopiesRepository copies, MoviesRepository movies, RentalsRepository rentals)
+        {
+            _context = context;
+            _clients = clients;
+            _copies = copies;
+            _movies = movies;
+            _rentals = rentals;
+        }
         public void RentMovie(int movieId, int clientId)
         {
             Expression<Func<Movie, bool>> getMovie = i => i.MovieId == movieId;
@@ -33,14 +41,6 @@ namespace RESTAPI.Services.Implementations
                 }
             }
             _context.SaveChanges();
-        }
-        public RentMovieService(CodeFirstContext context,ClientsRepository clients,CopiesRepository copies,MoviesRepository movies,RentalsRepository rentals)
-        {
-            _context = context;
-            _clients = clients;
-            _copies = copies;
-            _movies = movies;
-            _rentals = rentals;
         }
     }
 }

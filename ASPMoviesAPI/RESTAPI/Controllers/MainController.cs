@@ -16,13 +16,13 @@ namespace RESTAPI.Controllers
     [Route("api/[controller]")]
     public class MainController : ControllerBase
     {
-        private IMapper _mapper;
-        private IRentMovieService _rentService;
-        private IReturnMovieService _returnService;
-        private MoviesRepository _moviesRepo;
-        private ClientsRepository _clientsRepo;
-        private RentalsRepository _rentalsRepo;
-        private CopiesRepository _copiesRepo;
+        private readonly IMapper _mapper;
+        private readonly IRentMovieService _rentService;
+        private readonly IReturnMovieService _returnService;
+        private readonly MoviesRepository _moviesRepo;
+        private readonly ClientsRepository _clientsRepo;
+        private readonly RentalsRepository _rentalsRepo;
+        private readonly CopiesRepository _copiesRepo;
 
         public MainController(CodeFirstContext context, IRentMovieService _rent, IReturnMovieService _return, ClientsRepository clients, CopiesRepository copies, MoviesRepository movies, RentalsRepository rentals, IMapper mapper)
         {

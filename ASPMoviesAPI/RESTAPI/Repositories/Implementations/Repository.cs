@@ -9,8 +9,11 @@ namespace RESTAPI.Repositories.Implementations
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        public CodeFirstContext Context { get; set; }
-
+        public CodeFirstContext Context { get; set; } 
+        public Repository(CodeFirstContext context)
+        {
+            Context = context;
+        }
         public virtual List<T> GetAll()
         {
             var result = Context.Set<T>().AsQueryable().Select(e => e).ToList();
@@ -55,11 +58,6 @@ namespace RESTAPI.Repositories.Implementations
         public int SaveChanges()
         {
             return Context.SaveChanges();
-        }
-
-        public Repository(CodeFirstContext context)
-        {
-            Context = context;
-        }
+        } 
     }
 }
